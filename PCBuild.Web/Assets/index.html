@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <base href="%BASE_URL%" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <div style="width: 95% !important; margin: 25px auto;">
+
+        <div class="row">
+            <div class="col border bg-light">Memory         </div>
+            <div class="col border bg-light">Disk Storage   </div>
+            <div class="col border bg-light">USBs           </div>
+            <div class="col border bg-light">Graphics       </div>
+            <div class="col border bg-light">Weight         </div>
+            <div class="col border bg-light">Power Supply   </div>
+            <div class="col border bg-light">Processors     </div>
+            <div class="col border bg-light">Edit           </div>
+        </div>
+        <!-- ko foreach: pcs -->
+        <div class="row">
+            <div class="col border bg-light" data-bind="text: memory().displayName"></div>
+            <div class="col border bg-light" data-bind="text: diskStorage().displayName"></div>
+            <div class="col border bg-light" data-bind="text: usBtext"></div>
+            <div class="col border bg-light" data-bind="text: graphics().name"></div>
+            <div class="col border bg-light" data-bind="text: weight"></div>
+            <div class="col border bg-light" data-bind="text: powerSupply().displayName"></div>
+            <div class="col border bg-light" data-bind="text: processors().name"></div>
+            <div class="col border bg-light"><button type="submit" data-bind="click: $parent.edit" class="btn btn-primary mb-3">Edit</button></div>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="container">
+        <div class="mb-3">
+            <label class="form-label">Memory</label>
+            <select class="form-control" data-bind="options: memory,
+                       optionsText: 'displayName',
+                       value: selectMemory,
+                       optionsCaption: 'Choose...'"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">DiskStorage</label>
+            <select class="form-control" data-bind="options: diskStorage, optionsText: 'displayName', value: selectDiskStorage, optionsCaption: 'Choose...'"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">USBs</label>
+            <div class="input-group mb-3">
+                <select class="form-control" data-bind="options: usb, optionsText: 'usbType', value: selectUsb, optionsCaption: 'Choose...'"></select>
+                <button type="submit" class="btn btn-outline-secondary" data-bind="click: addUsb">add</button>
+            </div>
+            <ul data-bind="foreach: selectUsbs">
+                <li class="row">
+                    <div class="col" data-bind="text:  numberOf() + ' x ' + usb.usbType()"></div>
+                    <div class="col">
+                        <button class="btn btn-primary mb-3" data-bind="click: $parent.removeUsb">x</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Graphics</label>
+            <select class="form-control" data-bind="options: graphics,
+                       optionsText: 'name',
+                       value: selectGraphics,
+                       optionsCaption: 'Choose...'"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Power Supply</label>
+            <select class="form-control" data-bind="options: powerSupply,
+                       optionsText: 'displayName',
+                     value: selectPowerSupply,
+                       optionsCaption: 'Choose...'"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Processors</label>
+            <select class="form-control" data-bind="options: processors,
+                       optionsText: 'name',
+                     value: selectProcessors,
+                       optionsCaption: 'Choose...'"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Weight</label>
+            <input class="form-control" data-bind="textInput: weight"/>
+        </div>
+       
+
+
+        <button type="submit" class="btn btn-primary mb-3" data-bind="click: createNew, visible : notEditMode">Create Build</button>
+        <button type="submit" class="btn btn-primary mb-3" data-bind="click: saveEdit, visible : editMode">Save Edits</button>
+
+    </div>
+    <script src="Assets/App.js"></script>
+</body>
+
+</html>
+

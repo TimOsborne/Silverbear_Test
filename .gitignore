@@ -1,0 +1,20 @@
+DesignTemplates
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
+.vs
+node_modules
+GatorSurvey.Web/Assets/Dest/
+GatorSurvey.Web/node_modules
+GatorSurvey.Web/Dist/*
+!GatorSurvey.Web/Dist/lang/
+GatorSurvey.Web/App_Data/Local/*
+!GatorSurvey.Web/App_Data/Local/appsettings.config
+!GatorSurvey.Web/App_Data/Local/NLog.config
+GatorSurvey.Web/Images/
+DataBase/Management Scripts/
+
+GatorSurvey.Web/Exports/
